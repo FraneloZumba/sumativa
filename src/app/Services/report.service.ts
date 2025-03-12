@@ -1,29 +1,42 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, set, get, remove } from 'firebase/database';
-import { Observable, from } from 'rxjs';  // Asegúrate de importar Observable y from
-import { db } from '../../firebase-config'; // Desde la raíz del proyecto
+import { Firestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { Observable, from } from 'rxjs';
+import { db } from '../../firebase-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReportService {
-  private db = db; // Usar la instancia de la base de datos exportada
+  private reportsCollection = collection(db, 'reports'); // Colección 'reports' en Firestore
 
-  // Obtener todos los reportes desde Firebase
+  constructor() {}
+
+  // Obtener todos los reportes desde Firestore
   getReports(): Observable<any[]> {
-    return from(get(ref(this.db, 'reports')).then((snapshot) => {
-      return snapshot.exists() ? Object.values(snapshot.val()) : [];  // Si existen datos, devolverlos
+    return from(getDocs(this.reportsCollection).then((querySnapshot) => {
+      return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     }));
   }
 
-  // Agregar un nuevo reporte a Firebase
-  addReport(report: any): Promise<void> {
-    const newReportRef = ref(this.db, `reports/${report.id}`);
-    return set(newReportRef, report);  // Guardar el reporte en Firebase
+  // Obtener un solo reporte por ID desde Firestore
+  getReportById(id: string): Observable<any> {
+    return from(getDoc(doc(db, 'reports', id)).then(docSnapshot => {
+      return docSnapshot.exists() ? { id: docSnapshot.id, ...docSnapshot.data() } : null;
+    }));
   }
 
-  // Eliminar un reporte de Firebase
+  // Agregar un nuevo reporte a Firestore
+  addReport(report: any): Promise<void> {
+    return addDoc(this.reportsCollection, report).then(() => {});
+  }
+
+  // Actualizar un reporte en Firestore
+  updateReport(id: string, updatedData: any): Promise<void> {
+    return updateDoc(doc(db, 'reports', id), updatedData);
+  }
+
+  // Eliminar un reporte de Firestore
   deleteReport(id: string): Promise<void> {
-    return remove(ref(this.db, `reports/${id}`));  // Eliminar el reporte de Firebase
+    return deleteDoc(doc(db, 'reports', id));
   }
 }

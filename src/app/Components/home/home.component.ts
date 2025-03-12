@@ -22,10 +22,6 @@ export class HomeComponent {
       this.reports = data;
     });    
   }
-  
-  ngOnInit() {
-    this.loadReports(); // Esto asegurará que los reportes se carguen cuando el componente se inicializa
-  }  
 
   goToNewReport() {
     this.router.navigate(['/new-report']);
