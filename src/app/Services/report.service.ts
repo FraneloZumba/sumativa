@@ -31,13 +31,14 @@ export class ReportService {
   }
 
   // Actualizar un reporte en Firestore
-  updateReport(id: string, updatedData: any): Promise<void> {
-    return updateDoc(doc(db, 'reports', id), updatedData);
+  updateReport(id: string, report: any): Promise<void> {
+    const reportRef = doc(db, 'reports', id);
+    return updateDoc(reportRef, report);
   }
 
   // Eliminar un reporte de Firestore
   deleteReport(id: string): Promise<void> {
-    const reportDocRef = doc(db, 'reports', id);  // Usar db directamente
-    return deleteDoc(reportDocRef);  // Eliminar el documento
+    const reportRef = doc(db, 'reports', id);
+    return deleteDoc(reportRef);
   }
 }

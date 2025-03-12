@@ -25,22 +25,31 @@ export class CameraService {
     return true;
   }
 
-  // Método para tomar la foto
-  async takePicture(): Promise<string> {
+  // Método para tomar la foto y guardarla en localStorage como base64
+  async takePicture(): Promise<void> {
     await this.checkPermissions();
+    
+    // Tomar la foto y obtenerla como base64
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64, // Cambié aquí a Base64
       source: CameraSource.Camera
     });
 
-    const imageUrl = image.webPath;
+    const base64Image = image.base64String; // Esta es la cadena base64
 
-    if (imageUrl) {
-      return imageUrl;
+    // Guardar la imagen en localStorage
+    if (base64Image) {
+      localStorage.setItem('capturedImage', base64Image);
+      console.log('Imagen guardada en localStorage');
     } else {
       throw new Error('Error al tomar la foto');
     }
+  }
+
+  // Método para recuperar la imagen desde localStorage
+  getStoredImage(): string | null {
+    return localStorage.getItem('capturedImage');
   }
 }
