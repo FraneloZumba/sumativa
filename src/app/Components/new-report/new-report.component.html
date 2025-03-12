@@ -8,9 +8,13 @@
         <input type="text" class="form-input" placeholder="Ej: EQ-2024-001" [(ngModel)]="report.id">
     </div>
 
+    <!-- Contenedor para mostrar la imagen tomada -->
     <div class="camera-preview">
-        <img src="https://images.placeholders.dev/" alt="Preview cámara">
+        <img [src]="report.imageUrl || 'https://images.placeholders.dev/'" alt="Preview cámara">
     </div>
+
+    <!-- Botón para abrir la cámara -->
+    <button class="btn" (click)="takePhoto()">Tomar Foto</button>
 
     <div class="form-field">
         <label class="form-label">Descripción del Problema</label>

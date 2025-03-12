@@ -1,28 +1,27 @@
 <div class="home-container">
-    <h3 class="title">Lista de Reportes</h3>
-    <button class="btn btn-add-report" (click)="goToNewReport()"> ➕ Añadir Reporte </button>
-  
-    <div *ngIf="reports.length > 0" class="report-list">
-      <div class="report-item" *ngFor="let report of reports">
-        <div class="report-thumbnail">
-          <img [src]="report.imageUrl || 'https://images.placeholders.dev/'" alt="Equipo" />
+  <h3 class="title">Lista de Reportes</h3>
+  <button class="btn btn-add-report" (click)="goToNewReport()"> ➕ Añadir Reporte </button>
+
+  <div *ngIf="reports.length > 0" class="report-list">
+    <div class="report-item" *ngFor="let report of reports">
+      <div class="report-thumbnail">
+        <img [src]="report.imageUrl || 'https://images.placeholders.dev/'" alt="Equipo" />
+      </div>
+      <div class="report-info">
+        <div class="report-metadata">
+          <span class="metadata-item">📅 {{ report.date }}</span>
+          <span class="metadata-item">🔧 {{ report.id }}</span>
+          <span class="metadata-item">👤 {{ report.user }}</span>
+          <span class="status-badge">{{ report.status }}</span>
         </div>
-        <div class="report-info">
-          <div class="report-metadata">
-            <span class="metadata-item">📅 {{ report.date }}</span>
-            <span class="metadata-item">🔧 {{ report.id }}</span>
-            <span class="metadata-item">👤 {{ report.user }}</span>
-            <span class="status-badge">{{ report.status }}</span>
-          </div>
-          <div class="report-description">
-            {{ report.description }}
-          </div>
+        <div class="report-description">
+          {{ report.description }}
         </div>
-        <div class="report-actions">
-          <button class="btn btn-view" (click)="viewReport(report.id)">👁️ Ver Detalles</button>
-          <button class="btn btn-delete" (click)="deleteReport(report.id)">🗑️ Eliminar</button>
-        </div>
+      </div>
+      <div class="report-actions">
+        <button class="btn btn-view" (click)="viewReport(report.id)">👁️ Ver Detalles</button>
+        <button class="btn btn-delete" (click)="deleteReport(report.id)">🗑️ Eliminar</button>
       </div>
     </div>
   </div>
-  
+</div>

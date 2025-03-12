@@ -32,7 +32,10 @@
   
         <!-- Botón para guardar los cambios -->
         <button *ngIf="isEditing" class="btn btn-save" (click)="saveReport()">Guardar Cambios</button>
-  
+        
+        <!-- Botón para editar la foto -->
+        <button *ngIf="isEditing" class="btn" (click)="takePhoto()">Cambiar Foto</button>
+
         <!-- Botón para eliminar -->
         <button class="btn btn-delete" (click)="deleteReport()">Eliminar Reporte</button>
       </div>

@@ -17,7 +17,6 @@ export class HomeComponent {
     this.loadReports(); // Cargar reportes al iniciar
   }
 
-  // Cargar los reportes desde Firebase
   loadReports() {
     this.reportService.getReports().subscribe((data: any[]) => {
       this.reports = data;
@@ -28,17 +27,14 @@ export class HomeComponent {
     this.loadReports(); // Esto asegurará que los reportes se carguen cuando el componente se inicializa
   }  
 
-  // Ir a la página de creación de nuevo reporte
   goToNewReport() {
     this.router.navigate(['/new-report']);
   }
 
-  // Ver detalles de un reporte
   viewReport(id: string) {
     this.router.navigate(['/report-detail', id]);
   }
 
-  // Eliminar un reporte
   deleteReport(id: string) {
     this.reportService.deleteReport(id).then(() => {
       this.loadReports(); // Recargar lista después de eliminar

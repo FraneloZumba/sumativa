@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Importar CommonModule
-import { FormsModule } from '@angular/forms'; // Importar FormsModule
-import { ReportService } from '../../Services/report.service'; // Importar el servicio
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms'; 
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'; // Importar la cámara
+import { ReportService } from '../../Services/report.service'; 
 
 @Component({
   selector: 'app-new-report',
@@ -15,7 +16,7 @@ export class NewReportComponent {
   report = {
     id: '',
     description: '',
-    imageUrl: 'https://images.placeholders.dev/',
+    imageUrl: 'https://images.placeholders.dev/', // Imagen inicial
     date: new Date().toLocaleString(),
     status: 'Activo',
     user: 'Usuario Actual',
@@ -23,18 +24,16 @@ export class NewReportComponent {
 
   constructor(private router: Router, private reportService: ReportService) {}
 
-  // Función para regresar al home
   goBack() {
     this.router.navigate(['/home']);
   }
 
-  // Función para guardar el reporte
   saveReport() {
     if (this.report.id && this.report.description) {
       this.reportService.addReport(this.report)
         .then(() => {
           alert('Reporte guardado con éxito');
-          this.router.navigate(['/home']); // Regresar al home después de guardar
+          this.router.navigate(['/home']);
         })
         .catch((error) => {
           alert('Hubo un error al guardar el reporte: ' + error.message);
@@ -53,4 +52,26 @@ export class NewReportComponent {
       alert('Por favor completa todos los campos.');
     }
   }
+
+  // Función para abrir la cámara y capturar la foto
+// Función para abrir la cámara y capturar la foto
+async takePhoto() {
+  try {
+    const image = await Camera.getPhoto({
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera, // Usamos la cámara
+      quality: 100, // Calidad de la foto
+    });
+
+    // Verificar que image.dataUrl no sea undefined
+    if (image.dataUrl) {
+      this.report.imageUrl = image.dataUrl;
+      localStorage.setItem('lastPhoto', image.dataUrl);
+    } else {
+      console.error('No se pudo obtener la imagen.');
+    }
+  } catch (error) {
+    console.error("Error al tomar la foto:", error);
+  }
+}
 }

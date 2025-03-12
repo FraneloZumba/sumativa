@@ -4,6 +4,8 @@ import { ReportService } from '../../Services/report.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-report-detail',
@@ -44,7 +46,9 @@ export class ReportDetailComponent implements OnInit {
   // Activar el modo de edición
   editReport(): void {
     this.isEditing = true;
-  }
+    // Si se está editando la foto, puedes permitir tomar una nueva foto
+    this.takePhoto();
+  }  
 
   // Guardar los cambios del reporte
   saveReport(): void {
@@ -71,4 +75,26 @@ export class ReportDetailComponent implements OnInit {
       });
     }
   }
+
+  // Añadir esta función en report-detail.component.ts
+async takePhoto() {
+  try {
+    const image = await Camera.getPhoto({
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera,
+      quality: 100,
+    });
+
+    // Si la imagen es válida, asignarla al reporte
+    if (image.dataUrl) {
+      this.report.imageUrl = image.dataUrl;
+      // También podrías guardar la imagen en localStorage si es necesario
+      localStorage.setItem('lastPhoto', image.dataUrl);
+    }
+  } catch (error) {
+    console.error('Error al tomar la foto:', error);
+  }
+}
+
+
 }
