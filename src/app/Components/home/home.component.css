@@ -1,0 +1,117 @@
+/* Contenedor principal */
+.home-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #000;
+    border-radius: 8px;
+}
+
+/* Título */
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Botón principal */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-add-report {
+    background: #222;
+    color: #fff;
+    width: 100%;
+}
+
+.btn-add-report:hover {
+    background: #444;
+}
+
+/* Lista de reportes */
+.report-list {
+    margin-top: 20px;
+}
+
+/* Reporte individual */
+.report-item {
+    background: #111;
+    border: 1px solid #222;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Imagen del reporte */
+.report-thumbnail img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: #222;
+}
+
+/* Información del reporte */
+.report-info {
+    padding: 10px 0;
+}
+
+/* Metadatos */
+.report-metadata {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* Estado */
+.status-badge {
+    background: #444;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+}
+
+/* Descripción */
+.report-description {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ddd;
+}
+
+/* Botones de acción */
+.report-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btn-view {
+    background: #333;
+    color: #fff;
+}
+
+.btn-view:hover {
+    background: #555;
+}
+
+.btn-delete {
+    background: #900;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #b00;
+}

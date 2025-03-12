@@ -1,0 +1,21 @@
+<h3>Crear Nuevo Reporte</h3>
+
+<div class="new-report-form">
+    <button class="btn btn-back" (click)="goBack()">⬅ Regresar</button>
+
+    <div class="form-field">
+        <label class="form-label">ID del Equipo</label>
+        <input type="text" class="form-input" placeholder="Ej: EQ-2024-001" [(ngModel)]="report.id">
+    </div>
+
+    <div class="camera-preview">
+        <img src="https://images.placeholders.dev/" alt="Preview cámara">
+    </div>
+
+    <div class="form-field">
+        <label class="form-label">Descripción del Problema</label>
+        <textarea class="form-input" rows="4" placeholder="Describe el estado o problema del equipo..." [(ngModel)]="report.description"></textarea>
+    </div>
+
+    <button class="btn btn-save" (click)="saveReport()">Guardar Reporte</button>
+</div>
