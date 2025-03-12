@@ -20,7 +20,7 @@ export class HomeComponent {
   loadReports() {
     this.reportService.getReports().subscribe((data: any[]) => {
       this.reports = data;
-    });    
+    });
   }
 
   goToNewReport() {
@@ -33,7 +33,10 @@ export class HomeComponent {
 
   deleteReport(id: string) {
     this.reportService.deleteReport(id).then(() => {
-      this.loadReports(); // Recargar lista después de eliminar
+      this.loadReports();  // Recargar lista después de eliminar
+      alert('Reporte eliminado');
+    }).catch((error) => {
+      alert('Error al eliminar el reporte: ' + error.message);
     });
   }
 }

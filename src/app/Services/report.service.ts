@@ -37,6 +37,7 @@ export class ReportService {
 
   // Eliminar un reporte de Firestore
   deleteReport(id: string): Promise<void> {
-    return deleteDoc(doc(db, 'reports', id));
+    const reportDocRef = doc(db, 'reports', id);  // Usar db directamente
+    return deleteDoc(reportDocRef);  // Eliminar el documento
   }
 }
