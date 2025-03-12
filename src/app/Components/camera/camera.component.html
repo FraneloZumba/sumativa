@@ -1,1 +1,24 @@
-<p>camera works!</p>
+<div class="camera-container">
+    <div *ngIf="imgUrl; else placeholder">
+      <img [src]="imgUrl" alt="Imagen Capturada" class="captured-image" />
+    </div>
+    <ng-template #placeholder>
+      <div class="placeholder">
+        <span class="placeholder-icon">📷</span>
+        <span class="placeholder-text">No hay imagen seleccionada</span>
+      </div>
+    </ng-template>
+  
+    <button 
+      class="take-picture-button" 
+      (click)="takePicture()" 
+      [disabled]="loading">
+      <span *ngIf="loading">⌛</span>
+      <span *ngIf="!loading">Tomar Foto</span>
+    </button>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+  

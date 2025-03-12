@@ -1,0 +1,62 @@
+.report-detail-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .report-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .report-info label {
+    font-weight: bold;
+  }
+  
+  .report-info input,
+  .report-info textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .report-info textarea {
+    height: 100px;
+  }
+  
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .actions .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .actions .btn-edit {
+    background-color: #ffa500;
+    color: white;
+  }
+  
+  .actions .btn-save {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .actions .btn-delete {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .actions .btn:hover {
+    opacity: 0.8;
+  }
+  

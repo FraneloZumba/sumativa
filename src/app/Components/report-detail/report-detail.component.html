@@ -1,1 +1,40 @@
-<p>report-detail works!</p>
+<div class="report-detail-container">
+    <h3>Detalles del Reporte</h3>
+    
+    <!-- Mostrar los detalles del reporte -->
+    <div *ngIf="report">
+      <div class="report-info">
+        <label>ID del Equipo:</label>
+        <input type="text" [(ngModel)]="report.id" [readonly]="!isEditing" />
+  
+        <label>Descripción del Problema:</label>
+        <textarea [(ngModel)]="report.description" [readonly]="!isEditing"></textarea>
+  
+        <label>Fecha:</label>
+        <input type="text" [(ngModel)]="report.date" readonly />
+  
+        <label>Estado:</label>
+        <input type="text" [(ngModel)]="report.status" [readonly]="!isEditing" />
+  
+        <label>Usuario:</label>
+        <input type="text" [(ngModel)]="report.user" readonly />
+  
+        <label>Imagen:</label>
+        <img [src]="report.imageUrl || 'https://images.placeholders.dev/'" alt="Imagen del Reporte" />
+      </div>
+  
+      <!-- Botones de acción -->
+      <div class="actions">
+        <button class="btn" (click)="goBack()">Regresar</button>
+  
+        <!-- Botón para editar -->
+        <button *ngIf="!isEditing" class="btn btn-edit" (click)="editReport()">Editar</button>
+  
+        <!-- Botón para guardar los cambios -->
+        <button *ngIf="isEditing" class="btn btn-save" (click)="saveReport()">Guardar Cambios</button>
+  
+        <!-- Botón para eliminar -->
+        <button class="btn btn-delete" (click)="deleteReport()">Eliminar Reporte</button>
+      </div>
+    </div>
+  </div>  
